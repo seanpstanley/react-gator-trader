@@ -1,26 +1,25 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
 import Search from '../../components/Search/Search';
+import List from '../../components/BooksList'
+import NavBar from "../../components/Header/NavBar";
+
 import './Home.css';
 
 function Home() {
     return (
-        <div className="App">
+       <div>
+           <NavBar />
+            <div> 
             <Search />
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                </a>
-            </header>
-        </div>
+            {/* <List /> */}
+            </div>
+       </div>
+           
+            
+            
+           
+       
     );
 }
 
