@@ -54,8 +54,8 @@ const BooksList = (props) => {
   useEffect(() => {
    
       setNewBookList([
-        { seller: "Alan Nguyen", course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},
-        { seller: "Saw Luke Loo Wah", course: "Software Enginnering", bookTitle: "SRCUM Concepts", edition:"7", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 65 , views:20}
+        { course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},
+        { course: "Software Enginnering", bookTitle: "SRCUM Concepts", edition:"7", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 65 , views:20}
       ]);
 
     
@@ -67,7 +67,7 @@ const BooksList = (props) => {
       <MaterialTable 
       icons={tableIcons}
       columns={[
-        {title: "Seller", field: "seller"},
+        
         {title: "Course", field: "course"},
         {title: "Textbook", field: "bookTitle"},
         {title: "Edition", field: "edition"},
