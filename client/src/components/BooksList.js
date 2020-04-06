@@ -6,7 +6,7 @@ import TableRow from '@material-ui/core/TableRow';
 import TableBody from '@material-ui/core/TableBody';
 import Paper from '@material-ui/core/Paper';
 import Container from '@material-ui/core/Container';
-// import axios from 'axios';
+import axios from 'axios';
 import { TableContainer } from '@material-ui/core';
 import MaterialTable from "material-table";
 import { forwardRef } from 'react';
@@ -52,14 +52,22 @@ const BooksList = (props) => {
   
   const [newBookList, setNewBookList] = useState([]);
   useEffect(() => {
+    axios.get('http://localhost:5000/api/listings').then(response => {
+        setNewBookList(response.data);
+
+      });
+      
    
-      setNewBookList([
-        { course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},
-        { course: "Software Enginnering", bookTitle: "SRCUM Concepts", edition:"7", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 65 , views:20}
-      ]);
+    //   setNewBookList([
+    //     { course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},
+    //     { course: "Software Enginnering", bookTitle: "SCRUM Concepts", edition:"7", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 65 , views:20}
+    //   ]);
 
     
   }, [props.updated]);
+//   useEffect(() => {
+//     console.log(newBookList)
+//   }, [newBookList])
   return (
     <Container>
       
@@ -67,41 +75,43 @@ const BooksList = (props) => {
       <MaterialTable 
       icons={tableIcons}
       columns={[
-        
-        {title: "Course", field: "course"},
+        {title:"firstName", field:"firstname"},
+        {title:"lastName", field:"lastName"},
+        {title: "Course", field: "Course"},
         {title: "Textbook", field: "bookTitle"},
         {title: "Edition", field: "edition"},
-        {title: "Author", field: "author"},
+        {title: "Author", field: "Author"},
         {title: "ISBN", field: "ISBN"},
         {title: "Condition", field: "condition"},
-        {title: "Price", field: "price"},
         {title: "Views", field: "views"},
+        {title: "Price", field: "price"},
+       
         
       ]}
 
-    //   editable={{
-    //     onRowUpdate: (newData, oldData) =>
-    //       new Promise((resolve, reject) => {
-    //         axios.put("/patient", {newData});
-    //         console.log(newData);
-    //         setTimeout(() => {
-    //             {
-    //               props.setUpdated(props.updated + 1); 
-    //             }
-    //             resolve();
-    //         }, 1000);
-    //     }),
-    //     onRowDelete: oldData =>
-    //       new Promise((resolve, reject) => {
-    //         axios.delete("/patient?id=" + oldData._id);
-    //         setTimeout(() => {
-    //             {
-    //               props.setUpdated(props.updated + 1); 
-    //             }
-    //             resolve();
-    //         }, 1000);
-    //     })
-    //   }}
+      editable={{
+        onRowUpdate: (newData, oldData) =>
+          new Promise((resolve, reject) => {
+            console.log(oldData._id);
+            axios.put("http://localhost:5000/api/listings/" + oldData._id, newData);
+            setTimeout(() => {
+                {
+                  props.setUpdated(props.updated + 1); 
+                }
+                resolve();
+            }, 1000);
+        }),
+        onRowDelete: oldData =>
+          new Promise((resolve, reject) => {
+            axios.delete("http://localhost:5000/api/listings/" + oldData._id);
+            setTimeout(() => {
+                {
+                  props.setUpdated(props.updated + 1); 
+                }
+                resolve();
+            }, 1000);
+        })
+      }}
       title="Textbooks"
       data={
     //     { seller: "Alan Nguyen", course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},

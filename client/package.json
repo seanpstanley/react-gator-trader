@@ -8,6 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.9",
     "@material-ui/icons": "^4.9.1",
     "@material-ui/lab": "^4.0.0-alpha.48",
+    "axios": "^0.19.2",
     "react": "^16.10.1",
     "react-dom": "^16.10.1",
     "react-scripts": "^3.3.0",
