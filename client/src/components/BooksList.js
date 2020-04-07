@@ -10,6 +10,21 @@ import axios from 'axios';
 import { TableContainer } from '@material-ui/core';
 import MaterialTable from "material-table";
 import { forwardRef } from 'react';
+import IconButton from '@material-ui/core/IconButton';
+import Icon from '@material-ui/core/Icon';
+import ImageIcon from '@material-ui/icons/Image';
+
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import TextField from '@material-ui/core/TextField';
+import DialogActions from '@material-ui/core/DialogActions';
+import Button from '@material-ui/core/Button';
+
+
+
+
 
 import AddBox from '@material-ui/icons/AddBox';
 import ArrowUpward from '@material-ui/icons/ArrowUpward';
@@ -46,11 +61,14 @@ const tableIcons = {
     ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
   };
+  
 
 
 const BooksList = (props) => {
-  
-  const [newBookList, setNewBookList] = useState([]);
+    
+    const [open, setOpen] = useState(false);
+    const [newBookList, setNewBookList] = useState([]);
+
   useEffect(() => {
     axios.get('http://localhost:5000/api/listings').then(response => {
         setNewBookList(response.data);
@@ -68,28 +86,44 @@ const BooksList = (props) => {
 //   useEffect(() => {
 //     console.log(newBookList)
 //   }, [newBookList])
+
   return (
     <Container>
       
     <TableContainer component={Paper}>
+        
+  
       <MaterialTable 
       icons={tableIcons}
       columns={[
-        {title:"firstName", field:"firstname"},
-        {title:"lastName", field:"lastName"},
+        {title: 'Image', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 90, borderRadius: '0%'}}/> },
+        {title:"FirstName", field:"firstname"},
+        {title:"LastName", field:"lastName"},
         {title: "Course", field: "Course"},
         {title: "Textbook", field: "bookTitle"},
         {title: "Edition", field: "edition"},
         {title: "Author", field: "Author"},
         {title: "ISBN", field: "ISBN"},
-        {title: "Condition", field: "condition"},
+        {title: "Condition", field: "condition",lookup: { 1: 'Brand New', 2: 'Like New', 3: 'Used', 4:'Old'}},
         {title: "Views", field: "views"},
-        {title: "Price", field: "price"},
+        {title: "Price($)", field: "price"},
        
         
       ]}
+      
 
       editable={{
+        onRowAdd: newData =>
+        new Promise((resolve, reject) => {
+          
+          axios.post("http://localhost:5000/api/listings/" ,newData);
+          setTimeout(() => {
+              {
+                props.setUpdated(props.updated + 1); 
+              }
+              resolve();
+          }, 1000);
+      }),
         onRowUpdate: (newData, oldData) =>
           new Promise((resolve, reject) => {
             console.log(oldData._id);
@@ -112,7 +146,18 @@ const BooksList = (props) => {
             }, 1000);
         })
       }}
-      title="Textbooks"
+      actions={[
+        {
+          icon: ImageIcon,
+          tooltip: 'Add Image',
+          onClick: (event, rowData) => {
+            // setUser(rowData);
+            // setMessage(rowData.patientName + ', you have an upcoming appointment.');
+            setOpen(true);
+          }
+        }
+      ]}
+      title="Your Textbooks"
       data={
     //     { seller: "Alan Nguyen", course: "Human-Computer Interaction", bookTitle: "HCI Concepts", edition:"10", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 60 , views:10},
     //     { seller: "Saw Luke Loo Wah", course: "Software Enginnering", bookTitle: "SRCUM Concepts", edition:"7", author: "John Doe", ISBN: 1234567, condition:"Like New" ,price: '$' + 65 , views:20},
@@ -123,6 +168,18 @@ const BooksList = (props) => {
       />
 
     </TableContainer>
+    <Dialog open={open} onClose={() => setOpen(false)}>
+      <DialogTitle>Upload an Image</DialogTitle>
+      <DialogContent>
+      <DialogContentText>
+        Upload an image of your textbook 
+      </DialogContentText>
+        
+      </DialogContent>
+      <DialogActions>
+        
+      </DialogActions>
+      </Dialog>
     </Container>
   )
 

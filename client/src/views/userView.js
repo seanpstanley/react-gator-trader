@@ -30,6 +30,8 @@ import ProfileIcon from '@material-ui/icons/AccountCircle';
 import DirectionsIcon from '@material-ui/icons/Directions';
 import Collapse from '@material-ui/core/Collapse';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import AddIcon from '@material-ui/icons/Add';
 
 
 import EventNoteIcon from '@material-ui/icons/EventNote';
@@ -47,6 +49,7 @@ import { Link } from 'react-router-dom';
 import { Button, CssBaseline, ListItemText, ClickAwayListener } from '@material-ui/core';
 import BooksList from '../components/BooksList';
 import AddTextbook from '../components/AddTextbook';
+import AllBooksList from '../components/AllBooksList';
 
 
 
@@ -127,22 +130,26 @@ const UserView = () => {
               <ListItemIcon><ProfileIcon/></ListItemIcon>
               <ListItemText primary="View Profile"/>
             </ListItem>
+            <ListItem button onClick={() => {setView(3);setDrawerOpen(false)}} key={"allTextbooks"}>
+              <ListItemIcon><MenuBookIcon/></ListItemIcon>
+              <ListItemText primary="All Textbooks"/>
+            </ListItem>
             <ListItem button onClick={() => {setView(1);setDrawerOpen(false)}} key={"textbooks"}>
-              <ListItemIcon><ScheduleIcon/></ListItemIcon>
+              <ListItemIcon><MenuBookIcon/></ListItemIcon>
               <ListItemText primary="Your Textbooks"/>
             </ListItem>
-            <Collapse in={true} unmountOnExit>
+            {/* <Collapse in={true} unmountOnExit>
               <List disablePadding>
                 <ListItem className={classes.nested} button onClick={() => {setView(2);setDrawerOpen(false)}} key={"add-textbook"}>
-                  <ListItemIcon><PersonAddIcon /></ListItemIcon>
+                  <ListItemIcon><AddIcon /></ListItemIcon>
                   <ListItemText primary="Add Textbook"/>
                 </ListItem>
               </List>
-            </Collapse>
-            <ListItem button onClick={() => {setView(2);setDrawerOpen(false)}} key={""}>
+            </Collapse> */}
+            {/* <ListItem button onClick={() => {setView(2);setDrawerOpen(false)}} key={""}>
               <ListItemIcon><DirectionsIcon /></ListItemIcon>
               <ListItemText primary="IDK"/>
-            </ListItem>
+            </ListItem> */}
          
           </List>
         </Drawer>
@@ -150,6 +157,7 @@ const UserView = () => {
           
           {view == 1 ? <div><BooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
           {view == 2 ? <div><AddTextbook updated={updated} setUpdated={setUpdated}/> </div> : null}
+          {view == 3 ? <div><AllBooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
           {/* {view == 1 ? <div><ApptInfo updated={updated} setUpdated={setUpdated}/></div> : null}
           {view == 2 ? <div><Directions updated={updated} setUpdated={setUpdated}/></div> : null} */}
           
