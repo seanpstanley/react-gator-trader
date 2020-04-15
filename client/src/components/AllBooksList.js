@@ -36,6 +36,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
+import ButtonBase from '@material-ui/core/ButtonBase';
+
 
 
 const tableIcons = {
@@ -58,6 +60,26 @@ const tableIcons = {
     ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />)
 
 };
+const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    paper: {
+      padding: theme.spacing(2),
+      margin: 'auto',
+      maxWidth: 500,
+    },
+    image: {
+      width: 128,
+      height: 128,
+    },
+    img: {
+      margin: 'auto',
+      display: 'block',
+      maxWidth: '100%',
+      maxHeight: '100%',
+    },
+  }));
 
 
 const AllBooksList = (props) => {
@@ -99,24 +121,39 @@ const AllBooksList = (props) => {
         }
     }
 
+    const getMethod= (conditionNumber) => {
+      if(conditionNumber === '1'){
+          return "Sell";
+      }
+      else if(conditionNumber === '2'){
+          return "Trade";
+      }
+      else if(conditionNumber ==='3'){
+          return "Borrow";
+      }
+      else{
+          return "PDF";
+      }
+  }
+    const classes = useStyles();
 
     return (
         <Container>
 
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} width="100%">
                 <MaterialTable
                     icons={tableIcons}
                     columns={[
-                        { title: "firstName", field: "firstname" },
+                        { title: "firstName", field: "firstname"},
                         { title: "lastName", field: "lastName" },
                         { title: "Course", field: "Course" },
                         { title: "Textbook", field: "bookTitle" },
                         { title: "Edition", field: "edition" },
                         { title: "Author", field: "Author" },
                         { title: "ISBN", field: "ISBN" },
-                        { title: "Condition", field: "condition" },
-                        { title: "Views", field: "views" },
-                        { title: "Price", field: "price" },
+                        { title: "Condition", field: "condition",lookup: { 1: 'Brand New', 2: 'Like New', 3: 'Used', 4:'Old'}}, 
+                        { title: "Price ($)", field: "price" },
+                        {title: "Method", field: "method",lookup: { 1: 'Sell', 2: 'Trade', 3: 'Borrow', 4:'PDF'} }
 
 
                     ]}
@@ -126,33 +163,18 @@ const AllBooksList = (props) => {
                             render: rowData => {
 
                                 return (
-                                    <Grid container>
-                                        <Grid item xs={2} >
-                                            <div>
-                                                <Card>
-                                                    <CardActionArea>
-                                                        <CardMedia />
-                                                        <CardContent>
-                                                        <img src={rowData.imageUrl} style={{width: 120, borderRadius: '0%'}}/>
-                                                    </CardContent>
-                                                    </CardActionArea>
-
-                                                </Card>
-
-                                            </div>
+                                    
+                                    <Paper >
+                                      <Grid container spacing={2}>
+                                        <Grid item>
+                                          <ButtonBase className={classes.image}>
+                                          <img src={rowData.imageUrl} style={{width: 120, borderRadius: '0%'}}/>
+                                          </ButtonBase>
                                         </Grid>
-                                        <Grid item xs={10}>
-                                            <div>
-                                                <Card >
-                                                    <CardActionArea>
-                                                        <CardMedia
-
-
-                                                            title="book"
-                                                        />
-                                                        <CardContent>
-                                                            {/* {getCondition(rowData.condition)} */}
-                                                            <strong>Seller's Name:</strong> {rowData.firstname} {rowData.lastName}
+                                        <Grid item xs={12} sm container>
+                                          <Grid item xs container direction="column" spacing={2}>
+                                            <Grid item xs>
+                                            <strong>Seller's Name:</strong> {rowData.firstname} {rowData.lastName}
                                                             <br />
                                                             <br />
                                                             <strong>Course Number:</strong> {rowData.Course}
@@ -171,24 +193,30 @@ const AllBooksList = (props) => {
                                                             <br />
                                                             <br />
                                                             <strong>Condition:</strong> {getCondition(rowData.condition)}
-                                                            
                                                             <br />
                                                             <br />
                                                             <strong>Price:</strong> {rowData.price}
                                                             <br />
-
-                                                        </CardContent>
-                                                    </CardActionArea>
-                                                    <CardActions>
-                                                        <Button size="small" color="primary">
+                                                            <br />
+                                                            <strong>Method:</strong> {getMethod(rowData.method)}
+                                                            <br />
+                                                            
+                                    
+                                                            
+                                            </Grid>
+                                            <Grid item>
+                                                <Button size="small" color="primary">
                                                             Contact Seller
                                             </Button>
-                                                    </CardActions>
-
-                                                </Card>
-                                            </div>
+                                            </Grid>
+                                          </Grid>
+                                   
                                         </Grid>
-                                    </Grid>
+                                      </Grid>
+                                    </Paper>
+                                  
+
+                                    
                                 )
                             }
                         }
