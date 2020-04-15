@@ -11,8 +11,8 @@ function Home() {
        <div>
            <NavBar />
             <div> 
-            <Search />
-            {/* <List /> */}
+                <Search />
+                {/* <List /> */}
             </div>
        </div>
            
