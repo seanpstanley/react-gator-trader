@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useRef,useState, useEffect} from 'react';
 import Table from '@material-ui/core/Table';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
@@ -65,13 +65,22 @@ const tableIcons = {
 
 
 const BooksList = (props) => {
-    
+    const inputFile = useRef(null) 
+
     const [open, setOpen] = useState(false);
     const [newBookList, setNewBookList] = useState([]);
 
   useEffect(() => {
     axios.get('http://localhost:5000/api/listings').then(response => {
-        setNewBookList(response.data);
+
+      const result =  response.data.filter(name=> name.firstname + name.lastName == 'AlbertGator')
+
+        
+  
+      
+        // setNewBookList(response.data);
+        setNewBookList(result);
+
 
       });
       
@@ -86,14 +95,23 @@ const BooksList = (props) => {
 //   useEffect(() => {
 //     console.log(newBookList)
 //   }, [newBookList])
+const onButtonClick = () => {
+    // `current` points to the mounted file input element
+   inputFile.current.click();
+  };
 
   return (
+    
     <Container>
       
-    <TableContainer component={Paper}>
-        
+    <TableContainer component={Paper} >
+    {/*       {appointmentList.map(entry => entry.firstname == 'Alan' ? (
+            <TableRow key={entry._id}>
+              
+            </TableRow>
+          ) : null)} */}
   
-      <MaterialTable 
+      <MaterialTable  
       icons={tableIcons}
       columns={[
         {title: 'Image', field: 'imageUrl', render: rowData => <img src={rowData.imageUrl} style={{width: 90, borderRadius: '0%'}}/> },
@@ -105,8 +123,8 @@ const BooksList = (props) => {
         {title: "Author", field: "Author"},
         {title: "ISBN", field: "ISBN"},
         {title: "Condition", field: "condition",lookup: { 1: 'Brand New', 2: 'Like New', 3: 'Used', 4:'Old'}},
-        {title: "Views", field: "views"},
         {title: "Price($)", field: "price"},
+        {title: "Method", field: "method",lookup: { 1: 'Sell', 2: 'Trade', 3: 'Borrow', 4:'PDF'} }
        
         
       ]}
@@ -177,7 +195,18 @@ const BooksList = (props) => {
         
       </DialogContent>
       <DialogActions>
-        
+      <input type='file' id='file' ref={inputFile} style={{display: 'none'}}/>
+      <Button
+      
+          containerElement="label"
+          backgroundColor='#293C8E'
+          onClick={onButtonClick}
+          >
+                
+               
+
+          Upload
+        </Button>
       </DialogActions>
       </Dialog>
     </Container>
