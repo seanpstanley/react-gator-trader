@@ -14,7 +14,7 @@ function Home() {
 
         <div container>
             <NavBar />
-            <img src="landingPageBackground.jpg" alt="background" />
+            <img src="landingPageBackground.jpg" alt="background" width="100%" height="100%" />
             <div className="intro-title">
                 Welcome to Gator Trader
              </div>

@@ -50,6 +50,7 @@ import { Button, CssBaseline, ListItemText, ClickAwayListener } from '@material-
 import BooksList from '../components/BooksList';
 import AddTextbook from '../components/AddTextbook';
 import AllBooksList from '../components/AllBooksList';
+import Profile from '../components/profile';
 
 
 
@@ -99,7 +100,7 @@ const theme = createMuiTheme({
 const UserView = () => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(0);
   const [value, setValue] = useState(0);
   const [updated, setUpdated] = useState([]);
   
@@ -154,7 +155,7 @@ const UserView = () => {
           </List>
         </Drawer>
         <div className={classes.content}>
-          
+          {view == 0 ? <div><Profile /></div> : null} 
           {view == 1 ? <div><BooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
           {view == 2 ? <div><AddTextbook updated={updated} setUpdated={setUpdated}/> </div> : null}
           {view == 3 ? <div><AllBooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
