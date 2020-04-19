@@ -99,7 +99,7 @@ const theme = createMuiTheme({
 const UserView = () => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [view, setView] = useState(0);
+  const [view, setView] = useState(3);
   const [value, setValue] = useState(0);
   const [updated, setUpdated] = useState([]);
   

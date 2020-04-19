@@ -7,6 +7,7 @@ import Login from "./components/Login/Login";
 import Register from "./components/Login/Register";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 const App = () => {
   return (
     <div>
