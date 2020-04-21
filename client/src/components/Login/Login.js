@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
-import { Button, FormGroup, FormControl, FormLabel, Alert } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel, Alert } from "react-bootstrap";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
 
@@ -43,7 +43,7 @@ export default function Login() {
       <div className="Login">
         <form onSubmit={handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
-            <FormLabel>Email</FormLabel>
+            <ControlLabel>Email</ControlLabel>
             <FormControl
               autoFocus
               required
@@ -54,7 +54,7 @@ export default function Login() {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <FormLabel>Password</FormLabel>
+            <ControlLabel>Password</ControlLabel>
             <FormControl
               required
               value={password}
