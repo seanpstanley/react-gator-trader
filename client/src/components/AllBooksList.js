@@ -206,7 +206,7 @@ const AllBooksList = (props) => {
                                             </Grid>
                                             <Grid item>
                                                 <Button size="small" color="primary">
-                                                            Contact Seller
+                                                        <a href="mailto:jazztingo009@gmail.com" >Contact Seller</a>
                                             </Button>
                                             </Grid>
                                           </Grid>
