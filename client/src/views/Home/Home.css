@@ -25,3 +25,30 @@ body {
 .App-link {
     color: #09d3ac;
 }
+
+.intro-title {
+    left: 0;
+    line-height: 200px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 40%;
+    width: 100%;
+    font-size: 5em;
+}
+
+.intro-message{
+    left: 0;
+    line-height: 200px;
+    margin-top: -100px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    width: 100%;
+    font-size: 2em;
+    
+}
+
+.lp-background{
+    background-color: #09d3ac;
+}

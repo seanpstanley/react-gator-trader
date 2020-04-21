@@ -1,23 +1,27 @@
 import React from 'react';
 import logo from '../../assets/logo.svg';
+import Search from '../../components/Search/Search';
+import List from '../../components/BooksList'
+import NavBar from "../../components/Header/NavBar";
+import background from '../../assets/landingPageBackground.jpg'
+
 import './Home.css';
 
 function Home() {
+
+
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                </a>
-            </header>
+
+        <div container>
+            <NavBar />
+            <img src="landingPageBackground.jpg" alt="background" width="100%" height="100%" />
+            <div className="intro-title">
+                Welcome to Gator Trader
+             </div>
+            <div className="intro-message">
+                A Hub for all textbook needs
+             </div>
+
         </div>
     );
 }
