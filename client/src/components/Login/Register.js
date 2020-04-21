@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
 
@@ -23,7 +23,7 @@ export default function Register() {
         <div className="Login">
             <form onSubmit={handleSubmit}>
                 <FormGroup bsSize="large">
-                <FormLabel>Username</FormLabel>
+                <ControlLabel>Username</ControlLabel>
                 <FormControl
                     autoFocus
                     required
@@ -34,7 +34,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="email" bsSize="large">
-                <FormLabel>Email</FormLabel>
+                <ControlLabel>Email</ControlLabel>
                 <FormControl
                     autoFocus
                     required
@@ -45,7 +45,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="password" bsSize="large">
-                <FormLabel>Password</FormLabel>
+                <ControlLabel>Password</ControlLabel>
                 <FormControl
                     required
                     placeholder="At least 6 characters, must contain 1 number"
