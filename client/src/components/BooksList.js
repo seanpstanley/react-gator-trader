@@ -73,8 +73,8 @@ const BooksList = (props) => {
   useEffect(() => {
     axios.get('http://localhost:5000/api/listings').then(response => {
 
-      const result =  response.data.filter(name=> name.firstname + name.lastName == 'AlbertGator')
-        setNewBookList(response.data);
+      const result =  response.data.filter(name=> name.firstname + " " + name.lastName === props.username)
+        setNewBookList(result);
       });
       
    
