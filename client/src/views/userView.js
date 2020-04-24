@@ -165,7 +165,7 @@ const UserView = (props) => {
 
 
         </div>
-        <div style={{marginLeft: 105, marginTop: -290}}>
+        <div style={{marginLeft: 105, marginTop: -240}}>
           <i>Note: Click on the arrow beside the First Name to contact the seller</i>
         </div>
         
