@@ -6,23 +6,23 @@ import NavBar from "../../components/Header/NavBar";
 import background from '../../assets/landingPageBackground.jpg'
 
 import './Home.css';
+import SearchBar from '../../components/Search/SearchBar';
 
 function Home() {
-
-
     return (
-
-        <div container>
+        <>
             <NavBar />
-            <img src="landingPageBackground.jpg" alt="background" width="100%" height="100%" />
-            <div className="intro-title">
-                Welcome to Gator Trader
-             </div>
-            <div className="intro-message">
-                A Hub for all textbook needs
-             </div>
-
-        </div>
+            <main className="home-main">
+                {/* <img src="landingPageBackground.jpg" alt="background" width="100%" height="100%" /> */}
+                {/* <div className="intro-title">
+                    Welcome to Gator Trader
+                </div> */}
+                <Search className="search-bar" />
+                {/* <div className="intro-message">
+                    A Hub for all textbook needs
+                </div> */}
+            </main>
+        </>
     );
 }
 

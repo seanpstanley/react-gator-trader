@@ -25,7 +25,6 @@ const App = () => {
         </Route>
         <Route exact path="/Trade" component={UserView} />
 
-
         <Route component={NotFound}/>
       </Switch>
     </div>

@@ -1,5 +1,7 @@
 body {
     margin: 0;
+    background-image: url("../../assets/landingPageBackground.jpg");
+    background-size: cover;
 }
 
 .App {
@@ -24,6 +26,13 @@ body {
 
 .App-link {
     color: #09d3ac;
+}
+
+.home-main {
+    height: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .intro-title {
