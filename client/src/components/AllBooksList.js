@@ -153,6 +153,9 @@ const AllBooksList = (props) => {
 
     return (
         <Container>
+            
+          <b>Note: Click on the arrow beside the First Name to contact the seller</b>
+       
 
             <TableContainer component={Paper} width="100%">
                 <MaterialTable
@@ -243,7 +246,9 @@ const AllBooksList = (props) => {
                 />
 
             </TableContainer>
+            
         </Container>
+        
     )
 
 }

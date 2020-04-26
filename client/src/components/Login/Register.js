@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
-import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel } from "react-bootstrap";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
 import axios from "axios";
 
-export default function Register() {
+export default function Register(props) {
   const [email, setEmail] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
@@ -37,11 +37,11 @@ export default function Register() {
 
   return (
     <div>
-        <NavBar />
+        
         <div className="Login">
             <form onSubmit={handleSubmit}>
                 <FormGroup bsSize="large">
-                <ControlLabel>Full Name</ControlLabel>
+                <FormLabel>Full Name</FormLabel>
                 <FormControl
                     autoFocus
                     required
@@ -52,7 +52,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="email" bsSize="large">
-                <ControlLabel>Affiliation</ControlLabel>
+                <FormLabel>Affiliation</FormLabel>
                 <FormControl
                     required
                     placeholder="University of Florida"
@@ -62,7 +62,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="email" bsSize="large">
-                <ControlLabel>Phone Number</ControlLabel>
+                <FormLabel>Phone Number</FormLabel>
                 <FormControl
                     required
                     placeholder="329948294"
@@ -72,7 +72,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="email" bsSize="large">
-                <ControlLabel>Email</ControlLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl
                     autoFocus
                     required
@@ -83,7 +83,7 @@ export default function Register() {
                 />
                 </FormGroup>
                 <FormGroup controlId="password" bsSize="large">
-                <ControlLabel>Password</ControlLabel>
+                <FormLabel>Password</FormLabel>
                 <FormControl
                     required
                     placeholder="At least 6 characters, must contain 1 number"
@@ -98,7 +98,7 @@ export default function Register() {
                     </Button>
                 
                 <p>Already have an account?</p>
-                <Link to='/Login'>
+                <Link onClick={() => props.setView(2)}>
                     Click here to sign in.
                 </Link>
                 {/*<Button block bsSize="large" disabled={!validateForm()} type="submit">

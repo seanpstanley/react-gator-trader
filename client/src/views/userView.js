@@ -114,7 +114,7 @@ const UserView = (props) => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              UF TEXTBOOKS
+              GATOR TRADER
             </Typography>
             <Button component={Link} to="/Home" color="inherit">Logout</Button>
           </Toolbar>
@@ -165,9 +165,9 @@ const UserView = (props) => {
 
 
         </div>
-        <div style={{marginLeft: 105, marginTop: -240}}>
+        {/* <div style={{marginLeft: 105, marginTop: -240}}>
           <i>Note: Click on the arrow beside the First Name to contact the seller</i>
-        </div>
+        </div> */}
         
         {/* <AppBar position="static">
           <Toolbar>

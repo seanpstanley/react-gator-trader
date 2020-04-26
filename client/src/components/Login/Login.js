@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { Link, useHistory } from 'react-router-dom';
-import { Button, FormGroup, FormControl, ControlLabel, Alert } from "react-bootstrap";
+import { Button, FormGroup, FormControl, FormLabel, Alert } from "react-bootstrap";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
 import axios from "axios";
 
-export default function Login() {
+export default function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showAlert, setShowAlert] = useState(false);
@@ -53,11 +53,11 @@ export default function Login() {
 
   return (
     <div>
-      <NavBar />
+      {/* <NavBar /> */}
       <div className="Login">
         <form onSubmit={handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+            <FormLabel>Email</FormLabel>
             <FormControl
               autoFocus
               required
@@ -68,7 +68,7 @@ export default function Login() {
             />
           </FormGroup>
           <FormGroup controlId="password" bsSize="large">
-            <ControlLabel>Password</ControlLabel>
+            <FormLabel>Password</FormLabel>
             <FormControl
               required
               value={password}
@@ -82,7 +82,7 @@ export default function Login() {
                     </Button>
 
           <p>Don't have an account?</p>
-          <Link to='/Register'>
+          <Link onClick={() => props.setView(3)}>
             Click here to create one.
                 </Link>
           {/*<Button block bsSize="large" disabled={!validateForm()} type="submit">
