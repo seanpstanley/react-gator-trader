@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const App = () => {
   return (
     <div>
-      
       <Switch>
         <Route exact path="/Home" component={Home} />
         <Route exact path="/">

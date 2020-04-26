@@ -1,10 +1,8 @@
 let Listing = require("../models/listing");
 
 exports.create = async (req, res) => {
-
     Listing.create(req.body);
     res.json({ success: true, message: "Listing successfully created" });
-
 }
 
 exports.read = (req, res) => {
