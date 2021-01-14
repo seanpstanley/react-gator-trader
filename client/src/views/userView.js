@@ -100,7 +100,7 @@ const theme = createMuiTheme({
 const UserView = (props) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [view, setView] = useState(3);
+  const [view, setView] = useState(0);
   const [value, setValue] = useState(0);
   const [updated, setUpdated] = useState([]);
   
@@ -114,7 +114,7 @@ const UserView = (props) => {
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" className={classes.title}>
-              UF TEXTBOOKS
+              GATOR TRADER
             </Typography>
             <Button component={Link} to="/Home" color="inherit">Logout</Button>
           </Toolbar>
@@ -131,7 +131,7 @@ const UserView = (props) => {
               <ListItemIcon><ProfileIcon/></ListItemIcon>
               <ListItemText primary="View Profile"/>
             </ListItem>
-            <ListItem button onClick={() => {setView(3);setDrawerOpen(false)}} key={"allTextbooks"}>
+            <ListItem button onClick={() => {setView(2);setDrawerOpen(false)}} key={"allTextbooks"}>
               <ListItemIcon><MenuBookIcon/></ListItemIcon>
               <ListItemText primary="All Textbooks"/>
             </ListItem>
@@ -157,14 +157,17 @@ const UserView = (props) => {
         <div className={classes.content}>
           {view == 0 ? <div><Profile username={props.location.state.username} email={props.location.state.email} affiliation={props.location.state.affiliation} phoneNumber={props.location.state.phoneNumber}/></div> : null} 
           {view == 1 ? <div><BooksList updated={updated} setUpdated={setUpdated} username={props.location.state.username}/> </div> : null}
-          {view == 2 ? <div><AddTextbook updated={updated} setUpdated={setUpdated}/> </div> : null}
-          {view == 3 ? <div><AllBooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
+          {view == 2 ? <div><AllBooksList username={props.location.state.username} email={props.location.state.email} affiliation={props.location.state.affiliation} phoneNumber={props.location.state.phoneNumber} updated={updated} setUpdated={setUpdated}/> </div> : null}
           {/* {view == 1 ? <div><ApptInfo updated={updated} setUpdated={setUpdated}/></div> : null}
           {view == 2 ? <div><Directions updated={updated} setUpdated={setUpdated}/></div> : null} */}
           
 
 
         </div>
+        {/* <div style={{marginLeft: 105, marginTop: -240}}>
+          <i>Note: Click on the arrow beside the First Name to contact the seller</i>
+        </div> */}
+        
         {/* <AppBar position="static">
           <Toolbar>
             <Typography variant="h6"  className={classes.title} >Admin View</Typography>

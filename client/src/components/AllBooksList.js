@@ -62,24 +62,24 @@ const tableIcons = {
 };
 const useStyles = makeStyles((theme) => ({
     root: {
-      flexGrow: 1,
+        flexGrow: 1,
     },
     paper: {
-      padding: theme.spacing(2),
-      margin: 'auto',
-      maxWidth: 500,
+        padding: theme.spacing(2),
+        margin: 'auto',
+        maxWidth: 500,
     },
     image: {
-      width: 128,
-      height: 128,
+        width: 128,
+        height: 128,
     },
     img: {
-      margin: 'auto',
-      display: 'block',
-      maxWidth: '100%',
-      maxHeight: '100%',
+        margin: 'auto',
+        display: 'block',
+        maxWidth: '100%',
+        maxHeight: '100%',
     },
-  }));
+}));
 
 
 const AllBooksList = (props) => {
@@ -87,6 +87,7 @@ const AllBooksList = (props) => {
 
     const [newBookList, setNewBookList] = useState([]);
     const [condition, setCondition] = useState("");
+    const [email, setEmail] = useState("");
     useEffect(() => {
         axios.get('http://localhost:5000/api/listings').then(response => {
             setNewBookList(response.data);
@@ -105,55 +106,71 @@ const AllBooksList = (props) => {
     //     console.log(newBookList)
     //   }, [newBookList])
 
-    
+
     const getCondition = (conditionNumber) => {
-        if(conditionNumber === '1'){
+        if (conditionNumber === '1') {
             return "Brand New";
         }
-        else if(conditionNumber === '2'){
+        else if (conditionNumber === '2') {
             return "Like New";
         }
-        else if(conditionNumber ==='3'){
+        else if (conditionNumber === '3') {
             return "Used";
         }
-        else{
+        else {
             return "Old";
         }
     }
 
-    const getMethod= (conditionNumber) => {
-      if(conditionNumber === '1'){
-          return "Sell";
-      }
-      else if(conditionNumber === '2'){
-          return "Trade";
-      }
-      else if(conditionNumber ==='3'){
-          return "Borrow";
-      }
-      else{
-          return "PDF";
-      }
-  }
+    const getMethod = (conditionNumber) => {
+        if (conditionNumber === '1') {
+            return "Sell";
+        }
+        else if (conditionNumber === '2') {
+            return "Trade";
+        }
+        else if (conditionNumber === '3') {
+            return "Borrow";
+        }
+        else {
+            return "PDF";
+        }
+    }
     const classes = useStyles();
+
+    const handleEmail = (fN, lN) => {
+        axios.get('http://localhost:5000/api/users/')
+            .then((users) => {
+                users.data.forEach((user) => {
+                    if (user.username === fN + " " + lN) {
+                        window.location.href="mailto:" + user.email;
+                        
+                    }
+                })
+            })
+            
+    }
 
     return (
         <Container>
+            
+          <b>Note: Click on the arrow beside the First Name to contact the seller</b>
+       
 
             <TableContainer component={Paper} width="100%">
                 <MaterialTable
                     icons={tableIcons}
                     columns={[
-                        { title: "firstName", field: "firstname"},
+                        { title: "firstName", field: "firstname" },
                         { title: "lastName", field: "lastName" },
                         { title: "Course", field: "Course" },
                         { title: "Textbook", field: "bookTitle" },
                         { title: "Edition", field: "edition" },
                         { title: "Author", field: "Author" },
                         { title: "ISBN", field: "ISBN" },
-                        { title: "Condition", field: "condition",lookup: { 1: 'Brand New', 2: 'Like New', 3: 'Used', 4:'Old'}}, 
+                        { title: "Condition", field: "condition", lookup: { 1: 'Brand New', 2: 'Like New', 3: 'Used', 4: 'Old' } },
                         { title: "Price ($)", field: "price" },
-                        {title: "Method", field: "method",lookup: { 1: 'Sell', 2: 'Trade', 3: 'Borrow', 4:'PDF'} }
+                        { title: "Method", field: "method", lookup: { 1: 'Sell', 2: 'Trade', 3: 'Borrow', 4: 'PDF' } }
 
 
                     ]}
@@ -163,60 +180,61 @@ const AllBooksList = (props) => {
                             render: rowData => {
 
                                 return (
-                                    
-                                    <Paper >
-                                      <Grid container spacing={2}>
-                                        <Grid item>
-                                          <ButtonBase className={classes.image}>
-                                          <img src={rowData.imageUrl} style={{width: 120, borderRadius: '0%'}}/>
-                                          </ButtonBase>
-                                        </Grid>
-                                        <Grid item xs={12} sm container>
-                                          <Grid item xs container direction="column" spacing={2}>
-                                            <Grid item xs>
-                                            <strong>Seller's Name:</strong> {rowData.firstname} {rowData.lastName}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Course Number:</strong> {rowData.Course}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Book Title:</strong> {rowData.bookTitle}
-                                                            <br />
-                                                            <br />
-                                                            <strong>ISBN:</strong> {rowData.ISBN}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Edition:</strong> {rowData.edition}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Author:</strong> {rowData.Author}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Condition:</strong> {getCondition(rowData.condition)}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Price:</strong> {rowData.price}
-                                                            <br />
-                                                            <br />
-                                                            <strong>Method:</strong> {getMethod(rowData.method)}
-                                                            <br />
-                                                            
-                                    
-                                                            
-                                            </Grid>
-                                            <Grid item>
-                                                <Button size="small" color="primary">
-                                                        <a href="mailto:albert@gmail.com" >Contact Seller</a>
-                                            </Button>
-                                            </Grid>
-                                          </Grid>
-                                   
-                                        </Grid>
-                                      </Grid>
-                                    </Paper>
-                                  
 
-                                    
+                                    <Paper >
+                                        <Grid container spacing={2}>
+                                            <Grid item>
+                                                <ButtonBase className={classes.image}>
+                                                    <img src={rowData.imageUrl} style={{ width: 120, borderRadius: '0%' }} />
+                                                </ButtonBase>
+                                            </Grid>
+                                            <Grid item xs={12} sm container>
+                                                <Grid item xs container direction="column" spacing={2}>
+                                                    <Grid item xs>
+                                                        <strong>Seller's Name:</strong> {rowData.firstname} {rowData.lastName}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Course Number:</strong> {rowData.Course}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Book Title:</strong> {rowData.bookTitle}
+                                                        <br />
+                                                        <br />
+                                                        <strong>ISBN:</strong> {rowData.ISBN}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Edition:</strong> {rowData.edition}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Author:</strong> {rowData.Author}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Condition:</strong> {getCondition(rowData.condition)}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Price:</strong> {rowData.price}
+                                                        <br />
+                                                        <br />
+                                                        <strong>Method:</strong> {getMethod(rowData.method)}
+                                                        <br />
+
+
+
+
+                                                    </Grid>
+                                                    <Grid item>
+                                                        <Button size="small" color="primary"  >
+                                                            <a href={handleEmail(rowData.firstname, rowData.lastName)} >Contact Seller</a>
+                                                        </Button>
+                                                    </Grid>
+                                                </Grid>
+
+                                            </Grid>
+                                        </Grid>
+                                    </Paper>
+
+
+
                                 )
                             }
                         }
@@ -228,7 +246,9 @@ const AllBooksList = (props) => {
                 />
 
             </TableContainer>
+            
         </Container>
+        
     )
 
 }
