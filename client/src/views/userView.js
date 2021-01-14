@@ -97,7 +97,7 @@ const theme = createMuiTheme({
 });
 
 
-const UserView = () => {
+const UserView = (props) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [view, setView] = useState(3);
@@ -155,8 +155,8 @@ const UserView = () => {
           </List>
         </Drawer>
         <div className={classes.content}>
-          {view == 0 ? <div><Profile /></div> : null} 
-          {view == 1 ? <div><BooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
+          {view == 0 ? <div><Profile username={props.location.state.username} email={props.location.state.email} affiliation={props.location.state.affiliation} phoneNumber={props.location.state.phoneNumber}/></div> : null} 
+          {view == 1 ? <div><BooksList updated={updated} setUpdated={setUpdated} username={props.location.state.username}/> </div> : null}
           {view == 2 ? <div><AddTextbook updated={updated} setUpdated={setUpdated}/> </div> : null}
           {view == 3 ? <div><AllBooksList updated={updated} setUpdated={setUpdated}/> </div> : null}
           {/* {view == 1 ? <div><ApptInfo updated={updated} setUpdated={setUpdated}/></div> : null}

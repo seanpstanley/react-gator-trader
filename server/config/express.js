@@ -4,7 +4,8 @@ const path = require('path'),
     morgan = require('morgan'),
     bodyParser = require('body-parser'),
     exampleRouter = require('../routes/examples.server.routes'),
-    listingRouter = require('../routes/listingsRoute');
+    listingRouter = require('../routes/listingsRoute'),
+    userRouter = require('../routes/usersRoute');
 
 module.exports.init = () => {
     /* 
@@ -36,6 +37,7 @@ module.exports.init = () => {
     // add a router
     app.use('/api/example', exampleRouter);
     app.use('/api/listings', listingRouter);
+    app.use('/api/users', userRouter );
 
     if (process.env.NODE_ENV === 'production') {
         // Serve any static files

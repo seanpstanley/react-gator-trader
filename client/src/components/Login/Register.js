@@ -1,20 +1,38 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import "./Login.css";
 import NavBar from "../Header/NavBar";
+import axios from "axios";
 
 export default function Register() {
   const [email, setEmail] = useState("");
-  const [username, setUsername] = useState("");
+  const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
+  const [affiliation, setAffiliation] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  let history = useHistory();
 
   function validateForm() {
-    return email.length > 0 && password.length > 0 && username >0;
+    // return email.length > 0 && password.length > 0 && username >0;
   }
 
   function handleSubmit(event) {
     event.preventDefault();
+    const user = {
+        username: fullName,
+        email: email,
+        password: password,
+        affiliation: affiliation,
+        phoneNumber: phoneNumber
+    }
+    axios.post("/api/users", user)
+    .then(  history.push({
+        pathname: '/Trade',
+        state: {username: fullName, email: email, affiliation: affiliation, phoneNumber: phoneNumber}
+      }))
+    .catch((err) => console.log(err))
+    
   }
 
   return (
@@ -23,14 +41,34 @@ export default function Register() {
         <div className="Login">
             <form onSubmit={handleSubmit}>
                 <FormGroup bsSize="large">
-                <ControlLabel>Username</ControlLabel>
+                <ControlLabel>Full Name</ControlLabel>
                 <FormControl
                     autoFocus
                     required
                     type="text"
-                    placeholder="Username"
-                    value={username}
-                    onChange={e => setUsername(e.target.value)}
+                    placeholder="Andrew Garfield"
+                    value={fullName}
+                    onChange={e => setFullName(e.target.value)}
+                />
+                </FormGroup>
+                <FormGroup controlId="email" bsSize="large">
+                <ControlLabel>Affiliation</ControlLabel>
+                <FormControl
+                    required
+                    placeholder="University of Florida"
+                    value={affiliation}
+                    onChange={e => setAffiliation(e.target.value)}
+                    type="text"
+                />
+                </FormGroup>
+                <FormGroup controlId="email" bsSize="large">
+                <ControlLabel>Phone Number</ControlLabel>
+                <FormControl
+                    required
+                    placeholder="329948294"
+                    value={phoneNumber}
+                    onChange={e => setPhoneNumber(e.target.value)}
+                    type="number"
                 />
                 </FormGroup>
                 <FormGroup controlId="email" bsSize="large">
@@ -54,11 +92,11 @@ export default function Register() {
                     type="password"
                 />
                 </FormGroup>
-                <Link className = "button" to='/Trade'>
+                
                     <Button type = "submit" variant = "primary">
                         Create Account
                     </Button>
-                </Link>
+                
                 <p>Already have an account?</p>
                 <Link to='/Login'>
                     Click here to sign in.

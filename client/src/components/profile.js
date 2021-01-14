@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 });
 
 
-function Profile() {
+function Profile(props) {
     const classes = useStyles();
 
     return (
@@ -35,17 +35,17 @@ function Profile() {
                     />
                     <CardContent>
                         <Typography gutterBottom variant="h5" component="h2">
-                            Albert Gator
+                            {props.username}
             </Typography>
                         <Typography variant="body2" color="textSecondary" component="p">
                             <br />
-                            <strong>Email:</strong> albert@gmail.com 
+                            <strong>Email:</strong> {props.email}
                             <br />
                             <br />
-                            <strong>Phone Number: </strong>3529987488
+                            <strong>Phone Number: </strong>{props.phoneNumber}
                             <br />
                             <br />
-                            <strong>Affiliation:</strong> University of Florida
+                            <strong>Affiliation:</strong> {props.affiliation}
                             <br />
 
             </Typography>
